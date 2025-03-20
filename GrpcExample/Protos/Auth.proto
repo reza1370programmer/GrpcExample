@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcAuthenticaion";
+import "google/protobuf/empty.proto";
+
+package Auth;
+
+
+
+service AuthService{
+	rpc GenerateToken(google.protobuf.Empty) returns (CreateIdentityResponse);
+}
+
+message CreateIdentityResponse{
+	string token=1;
+}

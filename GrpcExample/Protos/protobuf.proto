@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcCrudService";
+import "google/protobuf/timestamp.proto";
+package product;
+
+
+service productService
+{
+	rpc CreateProduct(CreateProductRequest) returns (CreateProductResponse);
+	rpc GetProduct(GetProductRequest) returns (GetProductResponse);
+	rpc UpdateProduct(UpdateProductRequest) returns (UpdateProductResponse);
+	rpc DeleteProduct(DeleteProductRequest) returns (DeleteProductResponse);
+	rpc GetAllProducts (GetAllProductsRequest) returns (GetAllProductsResponse);
+
+}
+
+message CreateProductRequest
+{
+	string name=1;
+	string description=2;
+	double price=3;
+	repeated string color_set=4;
+	google.protobuf.Timestamp created_at=5;
+}
+message CreateProductResponse
+{
+	int32 id=1;
+}
+message GetProductRequest
+{
+	int32 id=1;
+}
+message GetProductResponse
+{
+	int32 id=1;
+	string name=2;
+	string description=3;
+	double price=4;
+	repeated string color_set=5;
+	google.protobuf.Timestamp created_at=6;
+}
+message UpdateProductRequest
+{
+	int32 id=1;
+	string name=2;
+	string description=3;
+	double price=4;
+	repeated string color_set=5;
+}
+message UpdateProductResponse
+{
+	bool success=1;
+}
+message DeleteProductRequest
+{
+	int32 id=1;
+}
+message DeleteProductResponse
+{
+	bool success=1;
+}
+// New messages for GetAllProducts
+message GetAllProductsRequest {
+    int32 page_number = 1;
+    int32 page_size = 2;
+}
+
+message GetAllProductsResponse {
+    repeated GetProductResponse products = 1; // Repeated field for a list of products
+}
